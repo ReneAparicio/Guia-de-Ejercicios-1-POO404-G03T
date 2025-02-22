@@ -8,7 +8,12 @@ public class Ejercicio5 {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new PagoHorasExtra().setVisible(true);
+                // Preguntar al usuario cuántos registros desea crear
+                String input = JOptionPane.showInputDialog(null, "¿Cuántos registros desea crear?", "Número de registros", JOptionPane.QUESTION_MESSAGE);
+                int numRegistros = Integer.parseInt(input);
+
+                // Crear la ventana principal
+                new PagoHorasExtra(numRegistros).setVisible(true);
             }
         });
     }
@@ -18,8 +23,13 @@ class PagoHorasExtra extends JFrame {
     private JTextField nombreField, salarioField, horasField;
     private JComboBox<String> departamentoCombo;
     private JTextArea resultadoArea;
+    private JButton siguienteButton; // Referencia directa al botón "Siguiente"
+    private int numRegistros;
+    private int registroActual = 0;
 
-    public PagoHorasExtra() {
+    public PagoHorasExtra(int numRegistros) {
+        this.numRegistros = numRegistros;
+
         setTitle("Calculadora de Horas Extras");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,8 +53,8 @@ class PagoHorasExtra extends JFrame {
         departamentoCombo = new JComboBox<>(departamentos);
         inputPanel.add(departamentoCombo);
 
-        JButton calcular = new JButton("Calcular");
-        inputPanel.add(calcular);
+        siguienteButton = new JButton("Siguiente"); // Inicializar el botón
+        inputPanel.add(siguienteButton);
 
         resultadoArea = new JTextArea();
         resultadoArea.setEditable(false);
@@ -53,7 +63,7 @@ class PagoHorasExtra extends JFrame {
         add(inputPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
-        calcular.addActionListener(new ActionListener() {
+        siguienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 calcularPagoHorasExtra();
@@ -101,9 +111,18 @@ class PagoHorasExtra extends JFrame {
             resultadoArea.append("Horas realizadas en el mes: " + horas + "\n");
             resultadoArea.append("Pago total de horas extras: $" + pagoHorasExtra + "\n\n");
 
+            // Limpiar campos para el siguiente registro
             nombreField.setText("");
             salarioField.setText("");
             horasField.setText("");
+
+            registroActual++;
+
+            // Verificar si se han ingresado todos los registros
+            if (registroActual >= numRegistros) {
+                JOptionPane.showMessageDialog(this, "Se han ingresado todos los registros.", "Fin", JOptionPane.INFORMATION_MESSAGE);
+                siguienteButton.setEnabled(false); // Deshabilitar el botón "Siguiente"
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
