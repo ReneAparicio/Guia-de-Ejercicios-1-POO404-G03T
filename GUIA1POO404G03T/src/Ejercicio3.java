@@ -4,7 +4,7 @@ import java.util.InputMismatchException; //<-- sirve para la lectura de la entra
 import java.util.Scanner;
 
 
-public class AlquilerJets {
+public class Ejercicio3 {
 
     public static void main(String [] args){
         Scanner scanner = new Scanner(System.in);
