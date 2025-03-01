@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class Descuentodematricula {
+public class Ejercicio4 {
     public static void main(String[] args) {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del estudiante:");
         String apellido = JOptionPane.showInputDialog("Ingrese el apellido del estudiante:");
@@ -30,4 +30,5 @@ public class Descuentodematricula {
                 + "Total a pagar: $" + totalPagar;
 
         JOptionPane.showMessageDialog(null, mensaje, "Resumen de Matrícula", JOptionPane.INFORMATION_MESSAGE);
+    }
     }
