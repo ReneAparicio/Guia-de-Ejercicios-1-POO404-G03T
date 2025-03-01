@@ -1,8 +1,7 @@
-public class Ejercicio1 {
-  import java.util.Scanner;
+import java.util.Scanner;
 
-class importationVehicular{
-    public static void main(String[] args) {
+public class Ejercicio1 {
+        public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Entrada de datos del vehículo
@@ -95,7 +94,4 @@ class importationVehicular{
         if (anio >= 2010 && anio <= 2015) return 15.99;
         return 0; // En caso de un error
     }
-}
-
-  
 }
